@@ -1,0 +1,4 @@
+streamlit
+google-genai
+firebase-admin
+streamlit-mic-recorder
