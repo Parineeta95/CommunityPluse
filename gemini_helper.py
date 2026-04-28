@@ -9,15 +9,12 @@ import tempfile
 import os
 
 # ── Gemini Setup ──────────────────────────
-client = genai.Client(api_key="AIzaSyBwpalZCFOtYRKLN7bctSUf1PAp4Y01B6g")
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 MODEL = "gemini-2.5-flash"
 
 # ── Firebase Setup ────────────────────────
 if not firebase_admin._apps:
-    cred = credentials.Certificate(
-        json.loads(st.secrets["firebase_key"])
-    )
-
+    cred = credentials.Certificate("firebase_key.json")
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
