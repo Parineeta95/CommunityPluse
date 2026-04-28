@@ -14,10 +14,15 @@ MODEL = "gemini-2.5-flash"
 
 # ── Firebase Setup ────────────────────────
 if not firebase_admin._apps:
-    cred = credentials.Certificate(st.secrets["firebase_key"])
-    firebase_admin.initialize_app(cred)
+    try:
+        cred = credentials.Certificate("firebase_key.json")
+        firebase_admin.initialize_app(cred)
+        db = firestore.client()
+    except:
+        db = None
+else:
 
-db = firestore.client()
+    db = firestore.client()
 
 
 # ── Firebase Functions ────────────────────
@@ -26,6 +31,8 @@ def save_need(need_data):
     db.collection("needs").add(need_data)
 
 def get_all_needs():
+    if not db:
+        return []
     docs = db.collection("needs").stream()
     needs = []
     for doc in docs:
