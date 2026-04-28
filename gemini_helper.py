@@ -1,3 +1,4 @@
+import streamlit as st
 from google import genai
 from google.genai import types
 import json
@@ -13,7 +14,10 @@ MODEL = "gemini-2.5-flash"
 
 # ── Firebase Setup ────────────────────────
 if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase_key.json")
+    cred = credentials.Certificate(
+        json.loads(st.secrets["firebase_key"])
+    )
+
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()

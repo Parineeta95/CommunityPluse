@@ -17,7 +17,7 @@ st.set_page_config(
     layout="wide"
 )
 
-GOOGLE_MAPS_KEY = "AIzaSyBvOPSX0tm_BA3Tb68P4PRzLe3_T_2htzI"
+GOOGLE_MAPS_KEY = st.secrets["GOOGLE_MAPS_KEY"]
 
 CREDENTIALS = {
     "NGO Worker": "ngo123",
